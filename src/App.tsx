@@ -1,41 +1,85 @@
 import React, {ChangeEvent, Component} from 'react';
 import './App.scss';
 
+import Settings, {ID} from "./components/Settings";
+import Length from "./components/Length";
+import Result from "./components/Result";
 
 interface StateType {
     currentText: string,
-    upCount: number,
-    lowCount: number,
-    numCount: number,
-    specialCount: number
+    length: number,
+    options: Options
 }
 
-enum Value {
-    UPPER,LOWER, NUMBER, SPECIAL
+interface Options {
+    upperCaseEnabled?: boolean,
+    lowerCaseEnabled?: boolean,
+    numbersEnabled?: boolean,
+    specialSymbolEnabled?: boolean
 }
+
 
 class App extends Component<any, StateType> {
 
     state = {
-        currentText: "bullshit",
-        upCount: 0,
-        lowCount: 0,
-        numCount: 0,
-        specialCount: 0,
+        currentText: "Click Generate",
+        length: 16,
+        options: {
+            upperCaseEnabled: true,
+            lowerCaseEnabled: false,
+            numbersEnabled: true,
+            specialSymbolEnabled: false,
+        }
     }
 
     getPassword = () => {
         this.setState({
-            currentText: this.generateRandomPassword(this.state.upCount, this.state.lowCount, this.state.numCount, this.state.specialCount)
+            currentText: "TODO"
         })
     }
 
-    private generateRandomPassword(up: number, low: number, num: number, special: number): string  {
+    lengthChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        this.setState({length: parseInt(event.target.value)})
+    }
+
+    optionChangeHandler(event: ChangeEvent<HTMLInputElement>, id: ID) {
+        switch (id) {
+            case ID.UPPERCASE:
+                this.setState((state, _) => ({options: {upperCaseEnabled: !state.options.upperCaseEnabled}}))
+                break;
+            case ID.LOWERCASE:
+                this.setState((state, _) => ({options: {upperCaseEnabled: !state.options.lowerCaseEnabled}}))
+                break;
+            case ID.NUMBER:
+                this.setState((state, _) => ({options: {upperCaseEnabled: !state.options.numbersEnabled}}))
+                break;
+            case ID.SPECIAL:
+                this.setState((state, _) => ({options: {upperCaseEnabled: !state.options.specialSymbolEnabled}}))
+                break;
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <Result value={this.state.currentText}/>
+                <Length length={this.state.length} onChange={this.lengthChangeHandler}/>
+                <Settings lowerCaseEnabled={this.state.options.lowerCaseEnabled}
+                          numbersEnabled={this.state.options.numbersEnabled}
+                          upperCaseEnabled={this.state.options.upperCaseEnabled}
+                          specialSymbolEnabled={this.state.options.specialSymbolEnabled}
+                />
+                <button onClick={this.getPassword}>Generate password</button>
+            </div>
+        );
+    }
+
+    private generateRandomPassword(up: number, low: number, num: number, special: number): string {
 
         const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         const lowerCase = 'abcdefghijklmnopqrstuvwxyz'
         const numbers = '0123456789'
-        const specialCharacters = '~!@#$%^&*()_+/{}|[]\\'
+        const specialCharacters = '~!@#$%^&*()_+/{}|[]\\<>,.?'
         let finalString = '';
 
         finalString += this.generateRandom(up, upperCase);
@@ -53,37 +97,6 @@ class App extends Component<any, StateType> {
         }
 
         return finalString
-    }
-
-    eventHandler = (event: ChangeEvent<HTMLInputElement>, value: Value) => {
-        switch (value) {
-            case Value.UPPER:
-                this.setState({upCount: parseInt(event.target.value)})
-                break;
-            case Value.LOWER:
-                this.setState({lowCount: parseInt(event.target.value)})
-                break;
-            case Value.NUMBER:
-                this.setState({numCount: parseInt(event.target.value)})
-                break;
-            case Value.SPECIAL:
-                this.setState({specialCount: parseInt(event.target.value)})
-                break;
-        }
-    }
-
-
-    render() {
-        return (
-            <div>
-                <h1>{this.state.currentText}</h1>
-                <input type="number" placeholder={"no of upperCase"} onChange={event => this.eventHandler(event, Value.UPPER)}/>
-                <input type="number" placeholder={"no of lower"} onChange={event => this.eventHandler(event, Value.LOWER)}/>
-                <input type="number" placeholder={"no of special"} onChange={event => this.eventHandler(event, Value.SPECIAL)}/>
-                <input type="number" placeholder={"no of number"} onChange={event => this.eventHandler(event, Value.NUMBER)}/>
-                <button onClick={this.getPassword}>Generate password</button>
-            </div>
-        );
     }
 }
 
