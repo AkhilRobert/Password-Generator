@@ -11,17 +11,21 @@ interface OptionsProps {
 class Options extends Component<OptionsProps, any> {
   render() {
     return (
-      <div>
-        <label className={styles.label} htmlFor={this.props.id}>
-          {this.props.text}
-        </label>
-        <input
-          className={styles.input}
-          type="checkbox"
-          id={this.props.id}
-          checked={this.props.enabled}
-          onChange={this.props.onChanged}
-        />
+      <div className={styles.container}>
+        <div className={styles.right__side}>
+          <label className={styles.label} htmlFor={this.props.id}>
+            {this.props.text}
+          </label>
+        </div>
+        <div className={styles.left__side}>
+          <input
+            className={styles.input}
+            type="checkbox"
+            id={this.props.id}
+            checked={this.props.enabled}
+            onChange={this.props.onChanged}
+          />
+        </div>
       </div>
     );
   }

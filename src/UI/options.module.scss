@@ -1,4 +1,9 @@
 .label,
 .input {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
 }

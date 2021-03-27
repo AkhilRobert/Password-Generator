@@ -8,6 +8,7 @@ import Result from './components/Result';
 interface StateType {
   currentText: string;
   length: number;
+  percentage: number;
   options: Options;
 }
 
@@ -22,6 +23,7 @@ class App extends Component<any, StateType> {
   state = {
     currentText: 'Click Generate',
     length: 16,
+    percentage: 19,
     options: {
       upperCaseEnabled: true,
       lowerCaseEnabled: false,
@@ -36,8 +38,12 @@ class App extends Component<any, StateType> {
     });
   };
 
-  lengthChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ length: parseInt(event.target.value) });
+  // Handles the change in the slider
+  lengthChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {  
+    this.setState({ length: parseInt(event.target.value) }, () => {
+      const _percentage = ((this.state.length - 8 )/ 42) * 100;      
+      this.setState({percentage: _percentage})
+    });
   };
 
   changeHandler = (id: ID) => {
@@ -110,11 +116,11 @@ class App extends Component<any, StateType> {
     return (
       <div className={styles.main__container}>
         <div className={styles.container}>
-          <h1>Password Generator</h1>
+          <h1 className={styles.heading}>Password Generator</h1>
           <div>
             <Result value={this.state.currentText} />
           </div>
-          <Length length={this.state.length} onChange={this.lengthChangeHandler} />
+          <Length length={this.state.length} onChange={this.lengthChangeHandler} percentage={this.state.percentage} />
           <Settings
             lowerCaseEnabled={this.state.options.lowerCaseEnabled}
             numbersEnabled={this.state.options.numbersEnabled}

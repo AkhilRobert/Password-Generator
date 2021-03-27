@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import styles from './styles/Length.module.scss';
+import styles from './styles/Result.module.scss';
 
 interface propType {
   value: string;
