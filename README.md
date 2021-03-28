@@ -1,5 +1,11 @@
 # PASSWORD GENERATOR
+
 A simple password generator in react.js
 
-## 🚧UNDER DEVELOPMENT🚧
- 
+## TechStack
+
+- React.js
+- Typescript
+- Sass
+
+![](images/1.gif)
