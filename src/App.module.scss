@@ -21,3 +21,18 @@
   font-size: 48px;
   margin-bottom: 27px;
 }
+
+.generate__button {
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+  background: linear-gradient(to right, #6278ed, #7f49aa);
+  color: #fff;
+  cursor: pointer;
+}

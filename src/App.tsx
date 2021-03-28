@@ -23,7 +23,7 @@ class App extends Component<any, StateType> {
   state = {
     currentText: 'Click Generate',
     length: 16,
-    percentage: 19,
+    percentage: 30,
     options: {
       upperCaseEnabled: true,
       lowerCaseEnabled: false,
@@ -39,10 +39,10 @@ class App extends Component<any, StateType> {
   };
 
   // Handles the change in the slider
-  lengthChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {  
+  lengthChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ length: parseInt(event.target.value) }, () => {
-      const _percentage = ((this.state.length - 8 )/ 42) * 100;      
-      this.setState({percentage: _percentage})
+      const _percentage = ((this.state.length - 8) / 26) * 100;
+      this.setState({ percentage: _percentage });
     });
   };
 
@@ -109,6 +109,10 @@ class App extends Component<any, StateType> {
       finalData.push(specialCharacters);
     }
 
+    if (finalData.length === 0) {
+      return 'Please Select A Option';
+    }
+
     return this.generateRandom(this.state.length, finalData);
   }
 
@@ -120,7 +124,11 @@ class App extends Component<any, StateType> {
           <div>
             <Result value={this.state.currentText} />
           </div>
-          <Length length={this.state.length} onChange={this.lengthChangeHandler} percentage={this.state.percentage} />
+          <Length
+            length={this.state.length}
+            onChange={this.lengthChangeHandler}
+            percentage={this.state.percentage}
+          />
           <Settings
             lowerCaseEnabled={this.state.options.lowerCaseEnabled}
             numbersEnabled={this.state.options.numbersEnabled}
@@ -128,7 +136,9 @@ class App extends Component<any, StateType> {
             specialSymbolEnabled={this.state.options.specialSymbolEnabled}
             changeHandler={(id: ID) => this.changeHandler(id)}
           />
-          <button onClick={this.getPassword}>Generate password</button>
+          <button onClick={this.getPassword} className={styles.generate__button}>
+            Generate password
+          </button>
         </div>
       </div>
     );

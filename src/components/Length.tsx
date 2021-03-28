@@ -17,16 +17,16 @@ class Length extends Component<propType, any> {
           length: <span>{this.props.length}</span>
         </p>
         <div className={styles.range__container}>
-          <div>8</div>
+          <div className={styles.min}>8</div>
           <StyledRangeSlider
             percentage={this.props.percentage}
             type="range"
             min={8}
-            max={50}
+            max={34}
             value={this.props.length}
             onChange={(event) => this.props.onChange(event)}
           />
-          <div>50</div>
+          <div className={styles.max}>34</div>
         </div>
       </div>
     );

@@ -23,25 +23,25 @@ class Settings extends Component<SettingsProps, any> {
         <p>Settings</p>
         <Options
           id={'uppercase'}
-          text={'uppercase'}
+          text={'include uppercase'}
           enabled={this.props.upperCaseEnabled}
           onChanged={() => this.props.changeHandler(ID.UPPERCASE)}
         />
         <Options
           id={'lowercase'}
-          text={'lowercase'}
+          text={'include lowercase'}
           enabled={this.props.lowerCaseEnabled}
           onChanged={() => this.props.changeHandler(ID.LOWERCASE)}
         />
         <Options
           id={'number'}
-          text={'number'}
+          text={'inculde number'}
           enabled={this.props.numbersEnabled}
           onChanged={() => this.props.changeHandler(ID.NUMBER)}
         />
         <Options
           id={'special_characters'}
-          text={'special characters'}
+          text={'include symbols'}
           enabled={this.props.specialSymbolEnabled}
           onChanged={() => this.props.changeHandler(ID.SPECIAL)}
         />

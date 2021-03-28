@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import styles from './options.module.scss';
+import styles from './styles/options.module.scss';
+import ToggleButton from '../UI/Toggle';
 
 interface OptionsProps {
   id: string;
@@ -18,12 +19,10 @@ class Options extends Component<OptionsProps, any> {
           </label>
         </div>
         <div className={styles.left__side}>
-          <input
-            className={styles.input}
-            type="checkbox"
-            id={this.props.id}
+          <ToggleButton
             checked={this.props.enabled}
             onChange={this.props.onChanged}
+            id={this.props.id}
           />
         </div>
       </div>

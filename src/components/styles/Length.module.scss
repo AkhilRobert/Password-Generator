@@ -6,7 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 2px 0;
+  background: #1d1f43;
+  padding: 12px;
+  border-radius: 12px;
+  margin: 12px 0px;
 }
 
 p {
@@ -17,4 +20,12 @@ p {
   span {
     color: #fff;
   }
+}
+
+.min {
+  margin-right: 14px;
+}
+
+.max {
+  margin-left: 14px;
 }
